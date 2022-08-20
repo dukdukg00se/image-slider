@@ -1,10 +1,10 @@
 # image-slider
 
-An image carousel for users to view images with forward/backward selections.
+An image carousel for users to view images with forward/back selections.
 
 ## Project Info
 
-Part of The Odin Project curriculum, fullstack JavaScript Dynamic User Interface Interactions section.
+Part of The Odin Project curriculum - fullstack JavaScript Dynamic User Interface Interactions section.
 
 ## Project Goals
 

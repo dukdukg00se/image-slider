@@ -15,59 +15,66 @@
  * @param {*} r 
  * @returns 
  */
-// function importAll(r) {
-//   const images = [];
-
-//   r.keys().forEach((item) => {
-//     images.push(r(item));
-//   });
-
-//   return images;
-// }
-
-// const imgs = importAll(
-//   require.context('./images', false, /\.(png|jpe?g|webp|svg)$/)
-// );
-
 function importAll(r) {
-  const images = {};
-
-  // console.log(r.keys());
-  // console.log(r.keys())
+  const images = [];
 
   r.keys().forEach((item) => {
-    // console.log(item)
-    // console.log(r(item));
-    images[item.replace('./', '')] = r(item);
+    images.push(r(item));
   });
 
   return images;
 }
+
 const imgs = importAll(
   require.context('./images', false, /\.(png|jpe?g|webp|svg)$/)
 );
+
+import 'material-symbols/rounded.css';
+
+
+// function importAll(r) {
+//   const images = {};
+
+//   // console.log(r)
+//   // console.log(r.keys());
+
+//   r.keys().forEach((item) => {
+//     // console.log(item)
+//     // console.log(r(item));
+//     images[item.replace('./', '')] = r(item);
+
+//     console.log(item)
+//   });
+
+//   return images;
+// }
+// const imgs = importAll(
+//   require.context('./images', false, /\.(png|jpe?g|webp|svg)$/)
+// );
+
 
 
 
 const displayImgSlider = () => {
   const sliderContainer = document.createElement('div');
 
-  Object.keys(imgs).forEach(key => {
-    let slide = document.createElement('img');
-    slide.src = imgs[key];
-    slide.alt = key.replace(/.webp/i, '').replace(/\d+/, '-$&');
-    sliderContainer.append(slide);
-  })
+  // Object.keys(imgs).forEach(key => {
+  //   let slide = document.createElement('img');
+  //   slide.src = imgs[key];
+  //   slide.alt = key.replace(/.webp/i, '').replace(/\d+/, '-$&');
+  //   sliderContainer.append(slide);
+  // })
 
-  const nxtBtn = document.createElement('button');
-  const prevBtn = document.createElement ('button');
+  // const nxtBtn = document.createElement('button');
+  // const prevBtn = document.createElement ('button');
 
-  nxtBtn.textContent = '>'
-  nxtBtn.type = 'button';
-  prevBtn.textContent = '&#10095';
-  prevBtn.type = 'button';
+  // nxtBtn.textContent = 'face'
+  // nxtBtn.type = 'button';
+  // nxtBtn.classList.add('material-symbols-rounded');
+  // prevBtn.textContent = '&#10095';
+  // prevBtn.type = 'button';
 
-  sliderContainer.append(nxtBtn, prevBtn);
+  // sliderContainer.append(nxtBtn, prevBtn);
 
 
   // for (let key in imgs) {

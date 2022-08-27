@@ -2,16 +2,22 @@
 
 
 
-const sliderBtns = document.querySelectorAll('.slider-btn');
+
+
+const slider = document.getElementById('image-slider');
 const sliderWrapper = document.getElementById('slider-wrapper');
-const frames = sliderWrapper.querySelectorAll('.slide-frame');
+const sliderBtns = slider.querySelectorAll('.slider-btn');
+const frames = slider.querySelectorAll('.slide-frame');
+
+// Chrome doesn't round px values
+// Leads to image bleeding sometimes when resizing
+// Fixed by manually setting slider width to 70% vw and round to whole number
+slider.style.width = Math.round(window.innerWidth * .7) + 'px';
 
 let size = sliderWrapper.offsetWidth;
 let counter = 1;
 
-sliderWrapper.style.transform = 'translateX('+ (-size * counter) + 'px)';
-
-
+sliderWrapper.style.transform = 'translateX(' + (-size * counter) + 'px)';
 
 
 sliderBtns.forEach(btn => {
@@ -39,11 +45,11 @@ sliderBtns.forEach(btn => {
 
 // The "resize" event is only on the window object, not the document object
 window.addEventListener('resize', () => {
+  slider.style.width = Math.round(window.innerWidth * .7) + 'px';
 
   size = sliderWrapper.offsetWidth;
-  sliderWrapper.style.transform = 'translateX('+ (-size * counter) + 'px)';
   sliderWrapper.style.transition = 'none';
-
+  sliderWrapper.style.transform = 'translateX(' + (-size * counter) + 'px)';
 })
 
 

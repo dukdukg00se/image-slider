@@ -16,7 +16,7 @@ section {
 
 
 
-  width: 75vw;
+  /* width: 75vw; */
   margin: auto;
   /* border: solid 3px; */
 
@@ -89,16 +89,36 @@ section {
   cursor: pointer;
 }
 
-button:first-of-type {
+.slider-btn:first-of-type {
   top: 45%;
   right: 0;
   /* padding-right: 5px; */
 }
 
-button:last-of-type {
+.slider-btn:last-of-type {
   top: 45%;
   left: 0;
 }
 
+#dot-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px;
+}
+
+.dot {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #cfcfcf;
+}
+
+.dot:hover {
+  cursor: pointer;
+  background-color: #808080;
+  transition: background-color .2s ease;
+}
 
 

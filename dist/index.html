@@ -5,10 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Slider</title>
+
+    <link href="../src/components/img-slider/styles/reset.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="../src/components/img-slider/styles/styles.css" rel="stylesheet" />
+
+    <script src="test.js" defer></script>
+
   </head>
   <body>
-    <h1>Image Slider</h1>
-    <div id="content"></div>
-    <script src="main.js"></script>
+    <!-- <h1>Image Slider</h1> -->
+    <!-- <div id="content"></div> -->
+
+    <section id="image-slider">
+
+      <div id="slider-wrapper">
+
+        <div class="slide-frame" id="first">
+          <img class="image" src="../src/components/img-slider/images/thumbnail5.webp" alt="test-pic">
+          <div class="slide-nmbr">5/5</div>
+        </div>
+
+
+    
+        <div class="slide-frame">
+          <img class="image" src="../src/components/img-slider/images/thumbnail1.webp" alt="test-pic">
+          <div class="slide-nmbr">1/5</div>
+        </div>
+  
+        <div class="slide-frame">
+          <img class="image" src="../src/components/img-slider/images/thumbnail2.webp" alt="test-pic">
+          <div class="slide-nmbr">2/5</div>
+        </div>
+  
+        <div class="slide-frame">
+          <img class="image" src="../src/components/img-slider/images/thumbnail3.webp" alt="test-pic">
+          <div class="slide-nmbr">3/5</div>
+        </div>
+  
+        <div class="slide-frame">
+          <img class="image" src="../src/components/img-slider/images/thumbnail4.webp" alt="test-pic">
+          <div class="slide-nmbr">4/5</div>
+        </div>
+  
+        <div class="slide-frame" id="last">
+          <img class="image" src="../src/components/img-slider/images/thumbnail5.webp" alt="test-pic">
+          <div class="slide-nmbr">5/5</div>
+        </div>
+
+
+
+        <div class="slide-frame" id="lastest">
+          <img class="image" src="../src/components/img-slider/images/thumbnail1.webp" alt="test-pic">
+          <div class="slide-nmbr">1/5</div>
+        </div>
+  
+  
+      </div>
+
+      <button type="button" class="material-symbols-rounded slider-btn">arrow_forward_ios</button>
+      <button type="button" class="material-symbols-rounded slider-btn">arrow_back_ios</button>
+    </section>
+
+
+    <!-- <script src="main.js"></script> -->
   </body>
 </html>

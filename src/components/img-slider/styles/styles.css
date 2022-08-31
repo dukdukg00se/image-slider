@@ -100,14 +100,14 @@ section {
   left: 0;
 }
 
-#dot-wrapper {
+#indicator-wrapper {
   display: flex;
   justify-content: center;
   gap: 7px;
   padding: 7px;
 }
 
-.dot {
+.indicator {
   display: inline-block;
   width: 15px;
   height: 15px;
@@ -115,7 +115,7 @@ section {
   background-color: #cfcfcf;
 }
 
-.dot:hover {
+.indicator:hover {
   cursor: pointer;
   background-color: #808080;
   transition: background-color .2s ease;

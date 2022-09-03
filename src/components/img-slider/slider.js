@@ -1,90 +1,138 @@
-/* eslint-disable */
-
-// import img1 from './images/thumbnail1.webp';
-// import img2 from './images/thumbnail2.webp';
-// import img3 from './images/thumbnail3.webp';
-// import img4 from './images/thumbnail4.webp';
-// import img5 from './images/thumbnail5.webp';
-
-
-
+import 'material-symbols/rounded.css';
+import './styles/styles.css';
 
 /**
- * Return array of images from images dir
- * For more info on importAll() and require.context: https://webpack.js.org/guides/dependency-management/#require-context
- * @param {*} r 
- * @returns 
- */
+ * Use to import slider images
+ * More on importAll(), require.context: https://webpack.js.org/guides/dependency-management/#require-context
+ * @param {*} r - request
+ * @returns - images obj w/ keys edited to remove "./" */
 function importAll(r) {
-  const images = [];
+  const images = {};
 
   r.keys().forEach((item) => {
-    images.push(r(item));
+    images[item.replace('./', '')] = r(item);
   });
 
   return images;
 }
-
-const imgs = importAll(
+const imgsObj = importAll(
+  // Create own context
+  // Get image files from "./images" dir
   require.context('./images', false, /\.(png|jpe?g|webp|svg)$/)
 );
 
-import 'material-symbols/rounded.css';
+// Add imgsObj parameter later
+const createSlider = () => {
+  const sliderContainer = document.createElement('section');
+  const slideWrapper = document.createElement('div');
+  const dotWrapper = document.createElement('div');
+  const nxtBtn = document.createElement('button');
+  const prevBtn = document.createElement('button');
 
+  sliderContainer.id = 'image-slider';
+  slideWrapper.id = 'slide-wrapper';
+  dotWrapper.id = 'dot-wrapper';
+  nxtBtn.textContent = 'arrow_forward_ios';
+  nxtBtn.type = 'button';
+  nxtBtn.classList.add('material-symbols-rounded');
+  nxtBtn.classList.add('slider-btn');
+  prevBtn.textContent = 'arrow_back_ios';
+  prevBtn.type = 'button';
+  prevBtn.classList.add('material-symbols-rounded');
+  prevBtn.classList.add('slider-btn');
 
-// function importAll(r) {
-//   const images = {};
+  const createSlideFrame = (imgInfo, imgNmbr) => {
+    const slideFrame = document.createElement('div');
+    const slideImg = document.createElement('img');
+    const slideNmbr = document.createElement('div');
 
-//   // console.log(r)
-//   // console.log(r.keys());
+    slideFrame.classList.add('slide-frame');
+    slideImg.alt = imgInfo[0].replace(/.webp/i, '').replace(/\d+/, '-$&');
+    slideImg.src = imgInfo[1];
+    slideImg.classList.add('image');
+    slideNmbr.classList.add('slide-nmbr');
+    slideNmbr.textContent = `${imgNmbr} / ${Object.keys(imgsObj).length}`;
+    slideFrame.append(slideImg, slideNmbr);
 
-//   r.keys().forEach((item) => {
-//     // console.log(item)
-//     // console.log(r(item));
-//     images[item.replace('./', '')] = r(item);
+    return slideFrame;
+  };
+  const createDot = (imgNmbr) => {
+    const dot = document.createElement('span');
 
-//     console.log(item)
-//   });
+    dot.classList.add('dot');
+    dot.dataset.img = imgNmbr;
+    dotWrapper.append(dot);
 
-//   return images;
-// }
-// const imgs = importAll(
-//   require.context('./images', false, /\.(png|jpe?g|webp|svg)$/)
-// );
+    return dot;
+  };
 
+  // Create slide and dot for each img
+  let counter = 1;
+  Object.entries(imgsObj).forEach((entry) => {
+    slideWrapper.append(createSlideFrame(entry, counter));
+    dotWrapper.append(createDot(counter));
 
+    counter++;
+  });
 
+  // To loop slides -
+  // duplicate first img and set as last slide
+  // duplicate last img and set as first slide
+  slideWrapper.append(createSlideFrame(Object.entries(imgsObj)[0], 1));
+  slideWrapper.prepend(
+    createSlideFrame(
+      Object.entries(imgsObj)[Object.entries(imgsObj).length - 1],
+      Object.entries(imgsObj).length
+    )
+  );
 
-const displayImgSlider = () => {
-  const sliderContainer = document.createElement('div');
-
-  // Object.keys(imgs).forEach(key => {
-  //   let slide = document.createElement('img');
-  //   slide.src = imgs[key];
-  //   slide.alt = key.replace(/.webp/i, '').replace(/\d+/, '-$&');
-  //   sliderContainer.append(slide);
-  // })
-
-  // const nxtBtn = document.createElement('button');
-  // const prevBtn = document.createElement ('button');
-
-  // nxtBtn.textContent = 'face'
-  // nxtBtn.type = 'button';
-  // nxtBtn.classList.add('material-symbols-rounded');
-  // prevBtn.textContent = '&#10095';
-  // prevBtn.type = 'button';
-
-  // sliderContainer.append(nxtBtn, prevBtn);
-
-
-  // for (let key in imgs) {
-  //   let slide = document.createElement('img');
-  //   slide.src = imgs[key];
-  //   slide.alt = key.replace(/.webp/i, '').replace(/\d+/, '-$&');
-  //   sliderContainer.append(slide);
-  // }
-
+  sliderContainer.append(slideWrapper, dotWrapper, nxtBtn, prevBtn);
   return sliderContainer;
 };
 
-export default displayImgSlider;
+// const createSlider = () => {
+//   const sliderContainer = document.createElement('section');
+//   const slideWrapper = document.createElement('div');
+//   const dotWrapper = document.createElement('div');
+//   const nxtBtn = document.createElement('button');
+//   const prevBtn = document.createElement('button');
+
+//   let counter = 1;
+//   Object.keys(imgsObj).forEach((key) => {
+//     const slideFrame = document.createElement('div');
+//     const slideImg = document.createElement('img');
+//     const slideNmbr = document.createElement('div');
+//     slideFrame.classList.add('slide-frame');
+//     slideImg.src = imgsObj[key];
+//     slideImg.alt = key.replace(/.webp/i, '').replace(/\d+/, '-$&');
+//     slideImg.classList.add('image');
+//     slideNmbr.classList.add('slide-nmbr');
+//     slideNmbr.textContent = `${counter} / 5`;
+//     slideFrame.append(slideImg, slideNmbr);
+//     slideWrapper.append(slideFrame);
+
+//     const dot = document.createElement('span');
+//     dot.classList.add('dot');
+//     dot.dataset.img = counter;
+//     dotWrapper.append(dot);
+
+//     counter += 1;
+//   });
+
+//   sliderContainer.id = 'image-slider';
+//   slideWrapper.id = 'slide-wrapper';
+//   dotWrapper.id = 'dot-wrapper';
+//   nxtBtn.textContent = 'arrow_forward_ios';
+//   nxtBtn.type = 'button';
+//   nxtBtn.classList.add('material-symbols-rounded');
+//   nxtBtn.classList.add('slider-btn');
+//   prevBtn.textContent = 'arrow_back_ios';
+//   prevBtn.type = 'button';
+//   prevBtn.classList.add('material-symbols-rounded');
+//   prevBtn.classList.add('slider-btn');
+//   sliderContainer.append(slideWrapper, dotWrapper, nxtBtn, prevBtn);
+
+//   return sliderContainer;
+// };
+
+export default createSlider;

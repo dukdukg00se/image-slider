@@ -3,19 +3,12 @@
 }
 
 .material-symbols-rounded {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 700,
-  'GRAD' 0,
-  'opsz' 48
+  font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 48;
 }
 
 /* Section is needed to hide overflow */
 /* If overflow hidden on slider container instead, won't be able to slide (transform) pics */
 section {
-
-
-
   /* width: 75vw; */
   margin: auto;
   /* border: solid 3px; */
@@ -27,12 +20,10 @@ section {
   position: relative;
   min-width: 370px;
 
-
   margin-top: 100px;
 }
 
-
-#slider-wrapper {
+#slide-wrapper {
   display: flex;
 
   /* transition: transform 500ms; */
@@ -55,7 +46,7 @@ section {
   /* max-height: 600px; */
 }
 
-  /* Constrain image width to parent width to prevent cropping of img */
+/* Constrain image width to parent width to prevent cropping of img */
 .image {
   /* max-width: 100%; */
   width: 100%;
@@ -79,7 +70,7 @@ section {
   color: rgba(225, 225, 225, 0.75);
   border: none;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 7px 0 7px  7px;
+  padding: 7px 0 7px 7px;
   position: absolute;
   font-size: 40px;
 }
@@ -90,24 +81,24 @@ section {
 }
 
 .slider-btn:first-of-type {
-  top: 45%;
+  top: 40%;
   right: 0;
   /* padding-right: 5px; */
 }
 
 .slider-btn:last-of-type {
-  top: 45%;
+  top: 40%;
   left: 0;
 }
 
-#indicator-wrapper {
+#dot-wrapper {
   display: flex;
   justify-content: center;
   gap: 7px;
   padding: 7px;
 }
 
-.indicator {
+.dot {
   display: inline-block;
   width: 15px;
   height: 15px;
@@ -115,16 +106,13 @@ section {
   background-color: #cfcfcf;
 }
 
-.indicator:hover {
+.dot:hover {
   cursor: pointer;
   background-color: #808080;
-  transition: background-color .2s ease;
+  transition: background-color 0.2s ease;
 }
-
 
 .displayed {
   background-color: #808080;
-  transition: background-color .2s ease;
+  transition: background-color 0.2s ease;
 }
-
-

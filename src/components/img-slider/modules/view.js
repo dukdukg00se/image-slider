@@ -1,12 +1,15 @@
 import 'material-symbols/rounded.css';
 import '../styles/styles.css';
 
+// This module controls what's displayed e.g., creating slider, setting slider size, etc..
+
 const createSlider = (imgsObj) => {
   const sliderContainer = document.createElement('section');
   const slideWrapper = document.createElement('div');
   const dotWrapper = document.createElement('div');
   const nxtBtn = document.createElement('button');
   const prevBtn = document.createElement('button');
+
   sliderContainer.id = 'image-slider';
   slideWrapper.id = 'slider-wrapper';
   dotWrapper.id = 'dot-wrapper';
@@ -18,19 +21,21 @@ const createSlider = (imgsObj) => {
   prevBtn.type = 'button';
   prevBtn.classList.add('material-symbols-rounded');
   prevBtn.classList.add('slider-btn');
+
   const createSlide = (imgInfo, imgNmbr) => {
     const slide = document.createElement('div');
     const slideImg = document.createElement('img');
     const index = document.createElement('div');
     slide.classList.add('slide-frame');
     slideImg.alt = imgInfo[0].replace(/.webp/i, '').replace(/\d+/, '-$&');
-    slideImg.src = imgInfo[1];
+    slideImg.src = imgInfo[1]; // eslint-disable-line
     slideImg.classList.add('image');
     index.classList.add('slide-nmbr');
     index.textContent = `${imgNmbr} / ${Object.keys(imgsObj).length}`;
     slide.append(slideImg, index);
     return slide;
   };
+
   const createDot = (imgNmbr) => {
     const dot = document.createElement('span');
     dot.classList.add('dot');
@@ -38,6 +43,7 @@ const createSlider = (imgsObj) => {
     dotWrapper.append(dot);
     return dot;
   };
+
   // Create slide and dot for each img
   let counter = 1;
   Object.entries(imgsObj).forEach((entry) => {
@@ -58,20 +64,23 @@ const createSlider = (imgsObj) => {
     )
   );
   sliderContainer.append(slideWrapper, dotWrapper, nxtBtn, prevBtn);
+
   return sliderContainer;
 };
 
-// Used to highlight dot indicators
-const highlight = (index) => {
+const highlightDot = (index) => {
   const indicators = document.querySelectorAll('.dot');
+  // Use nmbr of indicators as proxy for nmbr of imgs
+  const nmbrOfImgs = indicators.length;
+
   indicators.forEach((dot) => {
     if (+dot.dataset.img === index) {
       dot.classList.add('displayed');
-    } else if (index === 6) {
+    } else if (index > nmbrOfImgs) {
       indicators[0].classList.add('displayed');
-      indicators[4].classList.remove('displayed');
-    } else if (index === 0) {
-      indicators[4].classList.add('displayed');
+      indicators[nmbrOfImgs - 1].classList.remove('displayed');
+    } else if (index < 1) {
+      indicators[nmbrOfImgs - 1].classList.add('displayed');
       indicators[0].classList.remove('displayed');
     } else {
       dot.classList.remove('displayed');
@@ -101,8 +110,8 @@ const setFrame = () => {
 };
 
 const updateDisplay = (index, transitnProps) => {
-  highlight(index);
+  highlightDot(index);
   showSlide(index, transitnProps);
 };
 
-export { createSlider, highlight, setFrame, updateDisplay };
+export { createSlider, highlightDot, setFrame, updateDisplay };

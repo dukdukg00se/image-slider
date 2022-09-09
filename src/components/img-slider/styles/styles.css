@@ -23,7 +23,7 @@ section {
   margin-top: 100px;
 }
 
-#slide-wrapper {
+#slider-wrapper {
   display: flex;
 
   /* transition: transform 500ms; */
